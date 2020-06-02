@@ -1,0 +1,114 @@
+[[art.daps.asciidoc]]
+= DAPS AsciiDoc Quick Start Guide
+Luboš Kocman <Lubos.Kocman at suse dot com>
+:Revision: 0
+:toc:
+:icons: font
+:numbered:
+:website: CommunitySLEFeatureRequests
+
+ifdef::env-github[]
+//Admonitions
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+// Entities
+:adoc: AsciiDoc
+:db: DocBook
+:daps: DAPS
+
+This article will give you a view from the contributor perspective on openSUSE Leap. Many of the concepts, commands to execute, people to talk to and so on are very similar to [[Portal:Factory|openSUSE Factory]]. We recommend to use the [[openSUSE:How_to_contribute_to_Factory|How to Contribute to openSUSE Factory]] guide as a starting point, with this guide focusing on the differences specific to [[Portal:Leap|openSUSE Leap]]. This article will guide you through contributing to roughly 4000 openSUSE Leap packages which come from SUSE Linux Enterprise''.
+
+
+== Who is the audience?
+
+Both community and SUSE-internal contributors to [[Portal:Leap|openSUSE Leap]] who somehow need a change in one of packages which comes from SUSE Linux Enterprise (SLE). '''Please see an effort to capture these [[Portal:Leap/SLEFeatureRequests:Personas | personas]].''' [[Portal:Leap|openSUSE Leap]] contains roughly 4000 such packages with SLE origin as of today.
+
+[[openSUSE:Release_team | openSUSE Release team]] is here to help you in this regard.
+
+
+== Is this a new thing?
+
+This is not new to [[Portal:Leap|openSUSE Leap]]. It has always been the case. We're just getting it formalized with the goal of making it easier and smoother over time.
+This is independent from [[Portal:Leap/FAQ/ClosingTheLeapGap | Closing the Leap Gap]] proposal or [[Portal:Leap:Jump | the Jump prototype ]] for a next release of openSUSE Leap.
+
+
+== Typical cases of SLE Feature requests
+
+Please see our [[Portal:Leap/SLEFeatureRequests:Personas | SLE Feature Request personas]] to have a better understanding, as most of community SLE Feature requests are in fact [[Portal:Leap|openSUSE Leap]] requests.
+
+
+== What about regular bugs?
+
+Regular bugs are not in the scope of this process. 
+
+Please follow [[openSUSE:Submitting_bug_reports]] on how to submit a bug report. 
+We'll be more than happy if you'll link the Factory submit request to the bug.
+
+In most cases the final Submit Request (SR) will come from the SLE side and will then supersede any open [[Portal:Leap|openSUSE Leap]] SR against the package. Please keep this in mind.
+
+
+== How do I find package origin?
+
+Use osc origin (zypper in osc-plugin-origin) to check where the package comes from. 
+Packages which are subject to this process are those with origin SUSE:SLE*.  
+
+
+{{Shell|linux:~> osc origin -p openSUSE:Leap:15.2 package bash # SLE origin
+<br>SUSE:SLE-15-SP2:GA}}
+
+{{Shell|linux:~> osc origin -p openSUSE:Leap:15.2 package tmux # Factory origin
+<br>openSUSE:Factory}}
+
+{{Shell|linux:~> osc origin -p openSUSE:Leap:15.2 package kdelibs4 # Origin is Leap updates
+<br>openSUSE:Leap:15.1:Update}}
+
+
+== How can I create an SLE Feature Request?
+
+* '''Create a Submit Request against [[Portal:Leap|openSUSE Leap]]'''.
+
+First of all please keep in mind that we all need to respect openSUSE:Factory_development_model, so make sure that it was submitted to Factory as well. This also contributes to having the feature request processed more quickly.
+
+The Release Manager(s) and Release Engineer(s) will process the request and create an SLE Feature requests in [https://jira.suse.com JIRA] and request approvals. Submit Request will be linked to the feature request.
+
+Having an SR available significantly speeds up the process even though the SR against [[Portal:Leap|openSUSE Leap]] is expected to be rejected in the end as the change comes via SLE.
+
+* '''Create a bug report against openSUSE Distribution'''.
+
+The Release Manager(s) process all bugs with no priority set (default P5 priority) and transform obvious Feature requests into SLE feature requests in [https://jira.suse.com JIRA]. 
+
+If applicable you can reference a Submit Request against Factory or even a rejected Submit Request against [[Portal:Leap|openSUSE Leap]]. Please be aware that requests should respect the criteria for upcoming milestone. For example, if you submit a brand new feature request in RC or post-RC phase it will be most likely rejected or deferred to a next release.
+
+* '''Reach out to [[openSUSE:Release_team]] on irc'''
+Preferably Release Manager for [[Portal:Leap|openSUSE Leap]] on irc / #opensuse-factory for more guidance. 
+Do not use simply file request via plain email.
+
+
+== How do I get updates about the progress?
+
+We do currently provide a weekly updates on all SLE Community feature requests as part of [https://etherpad.opensuse.org/p/ReleaseEngineering-meeting|openSUSE Release Engineering Meeting Minutes]. Minutes are also sent each Wednesday to opensuse-factory@ right after the meeting.
+
+Unfortunately, there is currently no way to see updates from JIRA for non-SUSE people.
+This should change by autumn 2020, when we expect to have a proper process in place.
+
+The request for a transparent process is already in place (JIRA-722 - SLE feature process for external [[Portal:Leap|openSUSE Leap]] Contributors).
+
+
+'''Currently, the best way is to watch meeting minutes or ask Release Manager or Release Engineer for an update. See [[openSUSE:Release_team|openSUSE Release team]] for more information.'''
+
+
+==What does "Change has to come from SLE" mean?
+
+The current [[Portal:Leap|openSUSE Leap]] workflow receives an automatic submission from SUSE Linux Enterprise as soon as it's accepted in SLE.
+
+The [[Portal:Leap:Jump]] workflow will simply sync the SLE binary containing the change as soon as it is built.
+
+== Current content workflow for openSUSE Leap including SLE Feature requests
+Following diagram covers current situation and highlights problematic part of packages with SLE Origin, see red boxes and arrows. 
+
+[[File:Opensuse-leap-current-content-workflow.png|thumb|center]]
