@@ -1,0 +1,178 @@
+[[art.daps.asciidoc]]
+= DAPS AsciiDoc Quick Start Guide
+Luboš Kocman <Lubos.Kocman at suse dot com>
+:Revision: 0
+:toc:
+:icons: font
+:numbered:
+:website: CommunitySLEFeatureRequests
+
+ifdef::env-github[]
+//Admonitions
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+// Entities
+:adoc: AsciiDoc
+:db: DocBook
+:daps: DAPS
+
+This page is supposed to summarize what type of SUSE Linux Enterprise (SLE) feature requests are being requested either directly.
+
+Understanding these personas might help us identify bottlenecks in the current process and address them. You will see that they may also change based on the Product Phase of openSUSE which is more or less mirroring SLE, with the usual delay of week or two.
+
+This document was created as part of an effort to document the  [[:Portal:Leap/SLEFeatureRequests | Community SLE Feature requests]].}} 
+
+
+== Person A - Submits a Submit Requests against a package with SLE origin
+
+Person A submitted an update request to an application that is shipped in both
+[[Portal:Leap|openSUSE Leap]] and one of SLE products (referred to as a SLE origin).
+
+=== How was the change requested?
+No feature request tracker at all.
+Change landed directly as an [[Portal:Leap|openSUSE Leap]] submit request.
+The requester might not be aware that he's touching a package with foreign origin.
+
+=== Current Handling
+[https://build.opensuse.org/group/show/origin-reviewers Origin reviewers] will reject the submission as it's touching a package with an SLE origin. Reject message will contain a pointer to [[Portal:Leap/SLEFeatureRequests | SLE Feature Requests]] and information that request is now tracked as a Feature request against SUSE Linux Enterprise. Reported has to additionally create an [[:ECO]] request in a case that change request is reported or is planned to be implemented in a later release phase.
+
+==== Complications in Early Feature request
+
+* The fact that the current process rejects the original Submit Request is generally a bad message. Code will be re-used in case that feature is accepted, however, change gets accepted on a different instance of OBS, therefore we can't just supersede it. 
+
+* Another issue is reporting back feature updates. SLE Feature request is currently not visible to external contributors. They have to ask somebody with access to provide updates, otherwise, the process seems like a black hole.
+
+
+==== Complications in Later Feature request
+
+Same problem as in Early Feature request. The [[:ECO]] request has to be approved by several stakeholders that itself might take several days. We might get to the situation that request is handled as a Maintenance update in case that change is reported in the RC phase. Change might end up deferred to the next Service Pack in case that it triggers a mass rebuild or provides change which is not backward compatible.
+
+In case of maintenance update if change request would be reported in April, and the FCS date would be late July. This might bring some extra complications, see Person B.
+
+The request generally needs to be backed by reasoning, this gets even more important in case of [[:openSUSE:Leap:LateFeature | Late feature]] requests. Where it should be clear why is the change being done this late. Updates just for sake of update after RC is done is usually a good enough reason.
+
+<hr />
+== Person B - Submit Requests against two different origins
+
+Person B wants to share his changes to Factory with [[Portal:Leap|openSUSE Leap]]. He does it in his free time. Changes are touching two packages an application and a library. Application is shipped in [[Portal:Leap|openSUSE Leap]] and Package Hub (Leap or Factory origin), while the library in SLES and [[Portal:Leap|openSUSE Leap]] (SLE origin).
+
+=== How was the change requested?
+No feature request tracker at all.
+Change landed directly as [[Portal:Leap|openSUSE Leap]] submit requests.
+The requester might not be aware that he's touching a package with foreign origin.
+
+=== Current Handling
+
+* Library - same handling as Person A
+
+* App - SR is on hold, with a reference to Feature request against SUSE Linux Enterprise.
+
+==== Complications in Early Feature request
+Same complication as Person A, with a difference that it's clear that we block the contributor. 
+
+He's usually done with the work (code) and we force him to have an open Submit Request against Leap until SLE change lands in Leap.
+
+The delay in the case of Early Feature request, can be easily days to two weeks in the best case. Keep in mind that the code-part is already ready.
+
+==== Complications in Late Feature request
+
+Same problem as in Early Feature request.
+
+The delay in case of [[:openSUSE:Leap:LateFeature | Late feature]] request depends if it will be treated as a maintenance update or not. If it's not maintenance update, then it might take just a few days extra compared to Early Feature requests, due to current [[:ECO]] handling, but  It could be also months in case of Maintenance update. An example is if the request is created around Public RC in spring while release day would be in summer (e.g July).  [[:openSUSE:Leap:LateFeature | Late feature]] handling in form of a maintenance update in SLE would also imply introducing related change in [[Portal:Leap|openSUSE Leap]] as a maintenance update as well. SLE change will not propagate to Leap until SLE GA (few weeks after [[Portal:Leap|openSUSE Leap]] is GA).
+
+In case of maintenance update if change request would be reported in April, and the release date would be late July, then maintainers change in-progress is blocked up to three months. In the case of the next release, the App submission would have to be rejected at least for the current release.
+
+<hr/>
+
+== Person C - Submit Requests against two different origins, the package is not shipped in SLES 
+Person C worked on a "complex update of a software stack" submitted a
+Feature request against software which is has origin SUSE:SLE- but is
+not shipped in SLES. In some cases, it's shipped in a different
+"layered" product (Storage or Caasp). The layered product doesn't feel like
+updating the package without strong justification. SLE people don't
+care as they don't ship it.
+
+=== How was the change requested?
+No feature request tracker at all.
+Change landed directly as [[Portal:Leap|openSUSE Leap]] submit requests.
+The reporter might not be aware that he's touching a package with foreign origin.
+
+=== Current Handling
+
+Any Submit Request with openSUSE origin (Factory, Leap) would be treated the same as in the case of Person B. This means blocked on related submission. 
+
+The case of the package with SUSE:SLE origin is slightly different from person B as the package is not shipped in SLE. See following options:
+
+* Package from SUSE:SLE* project is only used as a build requires of SLES,  which is just not shipped. 
+* Package is shipped by one of the layered products on top of SLES. This could be SUSE Manager, SUSE Storage, or SUSE Caasp. These products keep some packages under SUSE:SLE structure in order not to duplicate or simply ease the maintenance effort.
+
+==== Complications in Early Feature request
+
+* For the case of build-requires only, there is not any complication. Handling is still over JIRA requests (similar to person A) but it's a no-brainer for Product Management. Therefore the evaluation part by PM in the current process is seen as overkill and is a candidate for re-working.
+
+* In case that package is shipped in a non-SLE product and most likely also build-requires for SLE:
+
+The struggle here is how someone has to figure out whether the package is or isn't shipped in some product and in which product. It's not very obvious unless you are explicitly looking for it. E.g. by a following [https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.1&arch=x86_64&query=go&module=1871 SCC query] which is available only to employees.
+
+These products usually mirror the SUSE Linux Enterprise Schedule but might have slightly different processes.
+Some products might hesitate or have a problem updating such package, **so there needs to be clear reasoning why is the change is needed**.
+
+==== Complications in Late Feature request
+
+* For the case of build-requires only, the [[:ECO]] could be skipped as the package is not shipped as part of any product. However the fast-tracked process is not formalized nor official, therefore it's handled as an exception and requires communication. Which can be seen as an overhead.
+
+* Generally same as [[:openSUSE:Leap:LateFeature | Late feature]] handling for Person B. However, the lifecycle of the related product has to be respected while requesting the change. It can be released before or after SUSE Linux Enterprise. Team/Product generally needs to have a good understanding of why is the change requested to adopt change.
+
+<hr/>
+
+== Person D
+Person D asked for an update of Leap application via Bugzilla, he was
+not aware that it's a SLES package. He's just asking for a particular
+functionality from a new update which is not yet available in Leap.
+
+=== How was the change requested?
+
+The change was requested typically via Bugzilla in openSUSE Distribution. 
+
+=== Current handling
+
+In some cases, engineering simply processes it as a bug and creates an update request based on the bug. Such requests are not very often cross-checked. If the Bugzilla entry is not a request to fix a particular bug then it should be treated as a Change request under the hood.
+
+What's currently being done is that Release Manager checks all new incoming bugs with priority set to P5 (None). And opens an SLE Feature request on their behalves.
+
+The main difference from e.g. Person A is that change itself is not submitted, just being requested. The justification for the request is even more important.  **Why is the change needed? What would happen if it would not be implemented in a given release?** This gets even more important if it's a [[:openSUSE:Leap:LateFeature | Late feature]] request.
+
+
+<hr/>
+== Person E
+Person E from our partner company asked us in an [[Portal:Leap|openSUSE Leap]] bug to update software in Leap, SLE, Factory. As there is an issue
+affecting all.
+
+=== How was the change requested?
+
+The change was requested typically via Bugzilla in all openSUSE Distribution products. 
+
+
+=== Current Handling
+
+This is the same as in D.
+But the difference is that this comes from not necessarily an openSUSE project member and partners may have a different tool (TAM) to propagate change. So these could be possibly eliminated for the scope of 4k packages.
+
+== Person F
+
+Person F is part of [https://www.suse.com/betaprogram/sle-beta/ SLE Public Beta program ] testing and raises a feature request directly against SLE. The reporter may or may not be a member of the openSUSE project.
+
+
+=== How was the change requested?
+
+These features are reported in Bugzilla Public Beta products for SUSE Linux Enterprise by people who are not part of the partner program or do not have dedicated TAM. And via Partner feature request process in JIRA for Partners or customers with dedicated TAM.
+
+=== Current Handling
+
+Public Beta manager similarly tracks the feature as the openSUSE Release Manager would do for Person D.
+
