@@ -36,7 +36,7 @@ Person A submitted an update request to an application that is shipped in both
 === How was the change requested?
 No feature request tracker at all.
 Change landed directly as an [[Portal:Leap|openSUSE Leap]] submit request.
-The requester might not be aware that he's touching a package with foreign origin.
+The requester might not be aware that they're touching a package with foreign origin.
 
 === Current Handling
 [https://build.opensuse.org/group/show/origin-reviewers Origin reviewers] will reject the submission as it's touching a package with an SLE origin. Reject message will contain a pointer to [[Portal:Leap/SLEFeatureRequests | SLE Feature Requests]] and information that request is now tracked as a Feature request against SUSE Linux Enterprise. Reported has to additionally create an [[:ECO]] request in a case that change request is reported or is planned to be implemented in a later release phase.
@@ -59,12 +59,12 @@ The request generally needs to be backed by reasoning, this gets even more impor
 <hr />
 == Person B - Submit Requests against two different origins
 
-Person B wants to share his changes to Factory with [[Portal:Leap|openSUSE Leap]]. He does it in his free time. Changes are touching two packages an application and a library. Application is shipped in [[Portal:Leap|openSUSE Leap]] and Package Hub (Leap or Factory origin), while the library in SLES and [[Portal:Leap|openSUSE Leap]] (SLE origin).
+Person B wants to share their changes to Factory with [[Portal:Leap|openSUSE Leap]]. They do it in their free time. Changes are touching two packages, an application and a library. Application is shipped in [[Portal:Leap|openSUSE Leap]] and Package Hub (Leap or Factory origin), while the library in SLES and [[Portal:Leap|openSUSE Leap]] (SLE origin).
 
 === How was the change requested?
 No feature request tracker at all.
 Change landed directly as [[Portal:Leap|openSUSE Leap]] submit requests.
-The requester might not be aware that he's touching a package with foreign origin.
+The requester might not be aware that they're touching a package with foreign origin.
 
 === Current Handling
 
@@ -75,7 +75,7 @@ The requester might not be aware that he's touching a package with foreign origi
 ==== Complications in Early Feature request
 Same complication as Person A, with a difference that it's clear that we block the contributor. 
 
-He's usually done with the work (code) and we force him to have an open Submit Request against Leap until SLE change lands in Leap.
+They're usually done with the work (code) and we force them to have an open Submit Request against Leap until SLE change lands in Leap.
 
 The delay in the case of Early Feature request, can be easily days to two weeks in the best case. Keep in mind that the code-part is already ready.
 
@@ -83,7 +83,7 @@ The delay in the case of Early Feature request, can be easily days to two weeks 
 
 Same problem as in Early Feature request.
 
-The delay in case of [[:openSUSE:Leap:LateFeature | Late feature]] request depends if it will be treated as a maintenance update or not. If it's not maintenance update, then it might take just a few days extra compared to Early Feature requests, due to current [[:ECO]] handling, but  It could be also months in case of Maintenance update. An example is if the request is created around Public RC in spring while release day would be in summer (e.g July).  [[:openSUSE:Leap:LateFeature | Late feature]] handling in form of a maintenance update in SLE would also imply introducing related change in [[Portal:Leap|openSUSE Leap]] as a maintenance update as well. SLE change will not propagate to Leap until SLE GA (few weeks after [[Portal:Leap|openSUSE Leap]] is GA).
+The delay in case of [[:openSUSE:Leap:LateFeature | Late feature]] request depends if it will be treated as a maintenance update or not. If it's not maintenance update, then it might take just a few days extra compared to Early Feature requests, due to current [[:ECO]] handling, but it could also be months in case of Maintenance update. An example is if the request is created around Public RC in spring while release day would be in summer (e.g July).  [[:openSUSE:Leap:LateFeature | Late feature]] handling in form of a maintenance update in SLE would also imply introducing related change in [[Portal:Leap|openSUSE Leap]] as a maintenance update as well. SLE change will not propagate to Leap until SLE GA (few weeks after [[Portal:Leap|openSUSE Leap]] is GA).
 
 In case of maintenance update if change request would be reported in April, and the release date would be late July, then maintainers change in-progress is blocked up to three months. In the case of the next release, the App submission would have to be rejected at least for the current release.
 
@@ -100,7 +100,7 @@ care as they don't ship it.
 === How was the change requested?
 No feature request tracker at all.
 Change landed directly as [[Portal:Leap|openSUSE Leap]] submit requests.
-The reporter might not be aware that he's touching a package with foreign origin.
+The reporter might not be aware that they're touching a package with foreign origin.
 
 === Current Handling
 
@@ -131,8 +131,8 @@ Some products might hesitate or have a problem updating such package, **so there
 <hr/>
 
 == Person D
-Person D asked for an update of Leap application via Bugzilla, he was
-not aware that it's a SLES package. He's just asking for a particular
+Person D asked for an update of Leap application via Bugzilla, they were
+not aware that it's a SLES package. They're just asking for a particular
 functionality from a new update which is not yet available in Leap.
 
 === How was the change requested?
